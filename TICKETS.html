@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Page</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    header {
+      background: #FFA500;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8); /* Transparent background */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group select, 
+    .form-group input, 
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .form-group select {
+      background-color: #fff;
+    }
+
+    .form-group textarea {
+      height: 100px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #FFA500;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: #e68900;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #FFA500;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    /* Ticket Preview Styling */
+    .ticket {
+      background: #FFA500;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .ticket h3 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .ticket p {
+      font-size: 18px;
+    }
+
+    .ticket .social-icons a {
+      margin: 0 10px;
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+    }
+
+    .ticket .social-icons a:hover {
+      color: #ffc107;
+    }
+
+    /* Print Button */
+    .print-btn {
+      background-color: #FF5722;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .print-btn:hover {
+      background-color: #E64A19;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ticket Page</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Book Your Ticket</h2>
+  <form id="ticket-form" action="checkout.html" method="GET">
+    <!-- Ticket Type -->
+    <div class="form-group">
+      <label for="ticket-type">Select Ticket Type</label>
+      <select id="ticket-type" name="ticket-type" required>
+        <option value="" disabled selected>-- Select Ticket Type --</option>
+        <option value="oman">Within Oman</option>
+        <option value="uae">United Arab Emirates</option>
+        <option value="ksa">Kingdom of Saudi Arabia</option>
+        <option value="qatar">Qatar</option>
+      </select>
+    </div>
+
+    <!-- Quantity -->
+    <div class="form-group">
+      <label for="quantity">Select Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="1" placeholder="Enter quantity" required>
+    </div>
+
+    <!-- Additional Details -->
+    <div class="form-group">
+      <label for="details">Additional Details (Optional)</label>
+      <textarea id="details" name="details" placeholder="Enter any additional information"></textarea>
+    </div>
+
+    <!-- Proceed to Checkout -->
+    <button type="submit" class="btn">Proceed to Checkout</button>
+  </form>
+
+  <!-- Ticket Preview Section -->
+  <div class="ticket" id="ticket-preview" style="display:none;">
+    <h3>Ticket Preview</h3>
+    <p><strong>Ticket Type:</strong> <span id="preview-type"></span></p>
+    <p><strong>Quantity:</strong> <span id="preview-quantity"></span></p>
+    <p><strong>Additional Details:</strong> <span id="preview-details"></span></p>
+    <div class="social-icons">
+      <a href="#" target="_blank">🔗</a>
+      <a href="#" target="_blank">📱</a>
+      <a href="#" target="_blank">🐦</a>
+    </div>
+    <button class="print-btn" onclick="printTicket()">Print Ticket</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 Gulf Line Transport LLC. <a href="index.html">Home</a> | <a href="checkout.html">Checkout</a></p>
+</footer>
+
+<script>
+  // Display ticket preview
+  document.getElementById('ticket-form').addEventListener('input', function() {
+    var ticketType = document.getElementById('ticket-type').value;
+    var quantity = document.getElementById('quantity').value;
+    var details = document.getElementById('details').value;
+
+    if (ticketType && quantity) {
+      document.getElementById('preview-type').textContent = ticketType.charAt(0).toUpperCase() + ticketType.slice(1).replace('-', ' ');
+      document.getElementById('preview-quantity').textContent = quantity;
+      document.getElementById('preview-details').textContent = details ? details : 'No additional details';
+      document.getElementById('ticket-preview').style.display = 'block';
+    } else {
+      document.getElementById('ticket-preview').style.display = 'none';
+    }
+  });
+
+  // Function to handle ticket printing
+  function printTicket() {
+    var ticketContent = document.getElementById('ticket-preview').innerHTML;
+    var printWindow = window.open('', '', 'height=500, width=500');
+    printWindow.document.write('<html><head><title>Ticket</title></head><body>');
+    printWindow.document.write(ticketContent);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Confirmation</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    header {
+      background: #ff7f00; /* Orange color */
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.8); /* Transparent form */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .ticket {
+      background: #ff7f00; /* Orange color */
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .ticket h3 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .ticket p {
+      font-size: 18px;
+    }
+
+    .ticket .social-icons a {
+      margin: 0 10px;
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+    }
+
+    .ticket .social-icons a:hover {
+      color: #ffc107;
+    }
+
+    /* Print Button */
+    .print-btn {
+      background-color: #ff7f00;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+    }
+
+    .print-btn:hover {
+      background-color: #e67e22;
+    }
+
+    /* Menu Buttons */
+    .menu-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .menu-buttons a {
+      background-color: #ff7f00;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    .menu-buttons a:hover {
+      background-color: #e67e22;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #ff7f00;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ticket Confirmation</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
+</header>
+
+<div class="container">
+  <!-- Ticket Info Section -->
+  <div class="ticket" id="ticket-preview">
+    <h3>Ticket Details</h3>
+    <p><strong>Ticket Type:</strong> <span id="preview-type"></span></p>
+    <p><strong>Quantity:</strong> <span id="preview-quantity"></span></p>
+    <p><strong>Additional Details:</strong> <span id="preview-details"></span></p>
+    <div class="social-icons">
+      <a href="#" target="_blank">🔗</a>
+      <a href="#" target="_blank">📱</a>
+      <a href="#" target="_blank">🐦</a>
+    </div>
+    <button class="print-btn" onclick="printTicket()">Print Your Ticket</button>
+  </div>
+
+  <!-- Menu Buttons Section -->
+  <div class="menu-buttons">
+    <a href="index.html">Home</a>
+    <a href="booking.html">Booking</a>
+    <a href="location.html">Location</a>
+    <a href="checkout.html">Checkout</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 Gulf Line Transport LLC. <a href="index.html">Home</a> | <a href="checkout.html">Checkout</a></p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  // Display ticket details
+  document.getElementById('ticket-preview').style.display = 'block';
+  document.getElementById('preview-type').textContent = 'Oman'; // Example
+  document.getElementById('preview-quantity').textContent = '2'; // Example
+  document.getElementById('preview-details').textContent = 'No additional details'; // Example
+
+  // Function to handle ticket printing
+  function printTicket() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    doc.setFontSize(18);
+    doc.text("Ticket Details", 20, 20);
+    
+    doc.setFontSize(14);
+    doc.text("Ticket Type: " + document.getElementById('preview-type').textContent, 20, 30);
+    doc.text("Quantity: " + document.getElementById('preview-quantity').textContent, 20, 40);
+    doc.text("Additional Details: " + document.getElementById('preview-details').textContent, 20, 50);
+    
+    doc.save("ticket.pdf");
+  }
+</script>
+
+</body>
+</html>

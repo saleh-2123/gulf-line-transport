@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('2.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        #logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        #logo img {
+            width: 150px;
+            height: auto;
+        }
+        #promotion-widget {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        #promotion-widget h3 {
+            text-align: center;
+            color: #ffcc00;
+        }
+        #promotion-widget button {
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .container {
+            max-width: 600px;
+            margin: 150px auto;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .payment-methods img {
+            width: 50px;
+            margin: 5px;
+            vertical-align: middle;
+        }
+        .payment-methods {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div id="logo">
+        <img src="GLT-LOGO.PNG" alt="Company Logo">
+    </div>
+
+    <!-- Promotion Widget -->
+    <div id="promotion-widget">
+        <h3>Special Offer!</h3>
+        <p>Book with us today and get a 15% discount on your first service!</p>
+        <button onclick="alert('Promotion Applied!')">Get Offer</button>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="container">
+        <h1>Checkout</h1>
+        <form action="PRINTTICKET.html" method="GET">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="address">Billing Address:</label>
+            <input type="text" id="address" name="address" placeholder="Enter your billing address" required>
+
+            <label for="payment-method">Payment Method:</label>
+            <select id="payment-method" name="payment-method" required>
+                <option value="visa">Visa</option>
+                <option value="mastercard">MasterCard</option>
+                <option value="paypal">PayPal</option>
+            </select>
+
+            <div class="payment-methods">
+                <img src="visa.png" alt="Visa">
+                <img src="mastercard.png" alt="MasterCard">
+                <img src="paypal.png" alt="PayPal">
+            </div>
+
+            <div id="card-details">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="Enter your card number" maxlength="16">
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="Security Code">
+            </div>
+
+            <button type="submit">Complete Payment</button>
+        </form>
+    </div>
+</body>
+</html>
